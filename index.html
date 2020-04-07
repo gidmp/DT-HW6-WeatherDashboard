@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+
+    <!-- link to jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- link to font awesome -->
+    <script src="https://kit.fontawesome.com/326ee3d75f.js" crossorigin="anonymous"></script>
+    <!-- link to bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- link to CSS stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+        <nav class="navbar navbar-dark bg-dark text-center">
+            <h1 class="header text-center">Weather Dashboard</h1>
+        </nav>
+
+    <div class = "container-fluid">
+        <div class="row">
+            <!-- search bar -->
+            <div id = "search-bar" class="col-lg-3">
+                <form class="form-inline">
+                    <div class="form-group mb-2">
+                      <label for="staticEmail2" class="sr-only">Email</label>
+                      <h4>Search for a city</h4>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                      <label for="inputPassword2" class="sr-only"></label>
+                      <input id="city-input" class="form-control" placeholder="City name">
+                    </div>
+                    <button type="submit" id="search-city-button" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
+                </form>
+
+                <div id = "search-history"></div>
+            </div>
+            
+            <!-- information section -->
+            <div class="col-lg-9">
+                <div class="jumbotron">
+                    <div>
+                        <div class="city"></div>
+                        <div class="temperature"></div>
+                        <div class="humidity"></div>
+                        <div class="wind-speed"></div>
+                        <div class="uv-index"></div>
+
+                    </div>
+                </div>
+
+                <div>
+                    <h3>5 day forecast</h3>
+                    <!-- use card for this -->
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
