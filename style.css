@@ -10,7 +10,10 @@ html, body, .row, .container-fluid {
     color: white;
 }
 
-
+.city{
+    font-size: 36px;
+    font-weight: 300;
+}
 #search-bar{
     background-color: lightgrey;
     height: 100% ;
