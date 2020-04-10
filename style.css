@@ -4,12 +4,6 @@ html, body, .row, .container-fluid {
     height: 100%;
 }
 
-.header {
-    text-align: center !important;
-    display: inline-block;
-    color: white;
-}
-
 .city{
     font-size: 36px;
     font-weight: 300;
