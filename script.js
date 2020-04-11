@@ -5,7 +5,7 @@ $(document).ready(function() {
     $("#search-city-button").on("click", function(event) {
         event.preventDefault();
         // This line grabs the input from the textbox
-        var city = $("#city-input").val().trim();
+        var city = $("#city-input").val().trim();        
         //pushed the value so the button can be recreated through local storage.
         cityHistory.push(city);
         storeButtons()
@@ -25,7 +25,7 @@ $(document).ready(function() {
     function renderButtons(city){
         var createButtons = $("<button>");
         //add class to each buttons
-        createButtons.addClass("cityButtons");
+        createButtons.addClass("cityButtons btn btn-block");
         createButtons.attr("data-name", city);
         createButtons.text(city);
         //prepend the city name into the div
@@ -50,7 +50,7 @@ $(document).ready(function() {
  
             $(".city").text(response.name +"  ("+date +")")
             $(".city").append(addIcon); 
-            $(".temperature").text("Temperature:  " + tempF + "F"); 
+            $(".temperature").text("Temperature:  " + tempF + " °F"); 
             $(".humidity").text("Humidity:  "+ response.main.humidity + "%");
             $(".wind-speed").text("Wind speed:  "+ response.wind.speed + "MPH");
             //Uv-index safety
@@ -70,11 +70,11 @@ $(document).ready(function() {
                         var uvSafety = $("<span>").attr("id", "uvSafety").addClass("badge");
                         uvSafety.text(uvValue);
                          if (uvValue <= 2){
-                            uvSafety.css("background-color", "lightgreen");
+                            uvSafety.addClass("favorable");
                         }else if (uvValue >=3 && uvValue <=7){
-                            uvSafety.css("background-color", "yellow");
+                            uvSafety.addClass("moderate");
                         }else{
-                            uvSafety.css("background-color", "red");
+                            uvSafety.addClass("severe");
                         }
                          $(".uv-index").text("UV Index:  " );
                         $(".uv-index").append(uvSafety);
@@ -113,7 +113,7 @@ $(document).ready(function() {
                 createDiv.append(addIcon, lineBreak);
   
                 var temp = ((response.list[index[i]].main.temp - 273.15) * 1.80 + 32).toFixed(2);
-                var pTemp = $("<p>").text("Temp: " + temp + "F");
+                var pTemp = $("<p>").text("Temp: " + temp + " °F");
                 createDiv.append(pTemp, lineBreak);
  
                 var humidity = response.list[index[i]].main.humidity;
@@ -155,6 +155,8 @@ $(document).ready(function() {
     $(document).on("click", ".cityButtons", function(event) {
         event.preventDefault();
         var cityName = $(this).attr("data-name");
+        storeInput(cityName);
+        cityHistory.push(cityName);
         displayCurrentInfo(cityName);
         displayFutureInfo(cityName);
     })

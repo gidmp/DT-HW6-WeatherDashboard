@@ -4,12 +4,62 @@ html, body, .row, .container-fluid {
     height: 100%;
 }
 
+.jumbotron {
+    line-height: 2.5;
+    background-color: white;
+    border: 1px solid lightgrey;
+    margin-top: 24px;
+    padding-top: 20px;
+    color: #5A6268;
+}
+
 .city{
     font-size: 36px;
-    font-weight: 300;
+    font-weight: 500;
 }
 #search-bar{
-    background-color: lightgrey;
+    background-color: #F8F9FA;
     height: 100% ;
 }
 
+.card-deck .card{
+    background-color:#007BFF;
+    color:white;
+    padding: 10px;
+}
+
+.favorable{
+    background-color: #28A745;
+    color:white;
+    padding: 8px;
+}
+
+.moderate{
+    background-color: #FFC108;
+    color:white;
+    padding: 8px;
+}
+
+.severe{
+    background-color: #DC3545;
+    color:white;
+    padding: 8px;
+}
+
+.cityButtons{
+    background-color: white;
+    border: 1px solid lightgrey;
+    text-align: left;
+    color: #5A6268;
+    padding: 10px;
+
+}
+
+#search-history{
+   display: flex;
+}
+
+#city-input{
+    position: relative;
+    left: -15px;
+}
