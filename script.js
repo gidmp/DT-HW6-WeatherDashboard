@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var date = moment().format('L');
-    console.log(date);
-    //when search button is clicked
+
+    //function that handle the event when search button is clicked
     $("#search-city-button").on("click", function(event) {
         event.preventDefault();
         // This line grabs the input from the textbox
@@ -10,7 +10,6 @@ $(document).ready(function() {
         cityHistory.push(city);
         storeButtons()
         // Adding cities from the textbox to array
-        //immediately take the value and run it on ajax
         displayCurrentInfo(city);
         displayFutureInfo(city);
         renderButtons(city);
@@ -21,7 +20,7 @@ $(document).ready(function() {
         $("#city-input").val("");
     });
   
-    //render city history buttons
+    //render city history buttons when the search button was clicked
     function renderButtons(city){
         var createButtons = $("<button>");
         //add class to each buttons
@@ -32,6 +31,8 @@ $(document).ready(function() {
         $("#search-history").prepend(createButtons);
        
     }
+    
+    //display the selected city's current weather info
     function displayCurrentInfo(cityName){
         var api = "96428242b049309d31d51b7cb823fae0";
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+ cityName +"&appid=" + api;
@@ -40,9 +41,6 @@ $(document).ready(function() {
         url: queryURL,
         method: "GET"
         }).then(function(response) {
-            console.log(response);
-            //write the code to create and append the info on screen
-            //add current date with moment JS after the city name
             var iconCode = response.weather[0].icon;
             var iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
             var addIcon = $("<img>").attr("src", iconurl);
@@ -52,12 +50,12 @@ $(document).ready(function() {
             $(".city").append(addIcon); 
             $(".temperature").text("Temperature:  " + tempF + " °F"); 
             $(".humidity").text("Humidity:  "+ response.main.humidity + "%");
-            $(".wind-speed").text("Wind speed:  "+ response.wind.speed + "MPH");
-            //Uv-index safety
-          
+            $(".wind-speed").text("Wind speed:  "+ response.wind.speed + "MPH");      
+
             //get city coordinate
             var lat = response.coord.lat;
             var lon = response.coord.lon;
+
              //function to findout the UV index of city based on its coordinate using closure
             var uvIndex = function(lat, lon){
                 var UVqueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid="+ api +"&lat="+ lat +"&lon="+ lon;
@@ -85,6 +83,8 @@ $(document).ready(function() {
           
         })
     }
+
+    //function to display the next 5 days weather forecast of the selected city
     function displayFutureInfo(cityName){
         var api = "96428242b049309d31d51b7cb823fae0";
         var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q="+ cityName +"&appid=" + api;
@@ -126,13 +126,22 @@ $(document).ready(function() {
           
         })
     }
+
+    //function that handles the history buttons event
+    $(document).on("click", ".cityButtons", function(event) {
+        event.preventDefault();
+        var cityName = $(this).attr("data-name");
+        cityHistory.push(cityName);
+        displayCurrentInfo(cityName);
+        displayFutureInfo(cityName);
+    })
+
+//storage------------------------------------------------------------
     function storeInput(cityName){
         localStorage.setItem("Last city searched", cityName);
     }
     displayCurrentInfo(localStorage.getItem("Last city searched"));
     displayFutureInfo(localStorage.getItem("Last city searched"));
-  
-    //make seperate storage for the buttons
   
     var cityHistory = JSON.parse(window.localStorage.getItem("history")) || [];
 
@@ -143,21 +152,11 @@ $(document).ready(function() {
     for(var i = 0; i < cityHistory.length; i++){
         renderButtons(cityHistory[i]);
     }
-  
+
     function storeButtons(){
         localStorage.setItem("history", JSON.stringify(cityHistory));
     }
 
   
-  
-  
     //when city history button is click, run through displayInfo function and print the info
-    $(document).on("click", ".cityButtons", function(event) {
-        event.preventDefault();
-        var cityName = $(this).attr("data-name");
-        storeInput(cityName);
-        cityHistory.push(cityName);
-        displayCurrentInfo(cityName);
-        displayFutureInfo(cityName);
-    })
  })
