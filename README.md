@@ -16,3 +16,6 @@ When a new city is submitted within the input form:
 Since uv index is a different api documentation, make a new function inside displaycurrentinfo that takes the longitude and latitude from the response parameter and put them inside uv index api. Print the uv index number and color  then return the function using closure so we can pass the response to uv index function as parameter
 
 5. Use moment JS manipulate add feature to set the future date
+
+
+![](DT6HW.gif)
